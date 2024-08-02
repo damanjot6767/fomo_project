@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
 import { ApiError } from '../utils/api-error';
-import { CoinEntryResponseDto } from '../controllers/coin-entry/dto';
+import { CoinEntryResponseDto, CreateCoinEntryDto } from '../controllers/coin-entry/dto';
 
 
 
@@ -68,7 +68,7 @@ export const getCoinEntriesByCoinIdwithCoinData = async (coinId: string, page: n
     }
 }
 
-export const createMultipleCoinEntries = async <CoinPayloadPayload>(values: CoinPayloadPayload): Promise<any> => {
+export const createMultipleCoinEntries = async (values: CreateCoinEntryDto[]): Promise<any> => {
     try {
         const res = await CoinEntriesModel.insertMany(values);
         return res

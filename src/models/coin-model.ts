@@ -7,12 +7,6 @@ import { CoinResponseDto, CreateCoinDto, UpdateCoinDto } from '../controllers/co
 
 export const coinSchema = new Schema(
     {
-        _id: {
-            type: String,
-            required: true,
-            unique: true,
-            index: true
-        },
         name: {
             type: String,
             required: true,
@@ -84,9 +78,25 @@ export const CoinModel = mongoose.model('Coin', coinSchema);
 export const getCoins = (): Promise<CoinResponseDto[]> => CoinModel.find();
 export const getCoinBySymbol = (symbol: string): Promise<CoinResponseDto> => CoinModel.findOne({ symbol });
 export const deleteCoinBySymbol = (symbol: string): any => CoinModel.findOneAndDelete({ symbol });
-export const updateCoinBySymbol = (symbol: string, values: UpdateCoinDto): Promise<CoinResponseDto> => CoinModel.findByIdAndUpdate(symbol, values, { new: true });
 
 export const createMultipleCoins = async (values: CreateCoinDto[]): Promise<any> => {
+    try {
+        const bulkOps = values.map((coin) => ({
+            updateOne: {
+                filter: { _id: coin._id },
+                update: { $set: coin },
+                upsert: true
+            }
+        }))
+
+        const res = await CoinModel.bulkWrite(bulkOps);
+        return res
+    } catch (error) {
+        throw new ApiError(500, "something went wrong while create multiple coins")
+    }
+}
+
+export const updateMultipleCoins = async (values: CreateCoinDto[]): Promise<any> => {
     try {
         const bulkOps = values.map((coin) => ({
             updateOne: {

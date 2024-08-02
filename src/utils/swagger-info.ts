@@ -2,8 +2,8 @@ export const swaggerInfo = {
     "swagger": "2.0",
     "info": {
       "version": "2.0.0",
-      "title": "chat-api",
-      "description": "Project",
+      "title": "fomo-factory-api",
+      "description": "Crypo coin",
       "termsOfService": "http://swagger.io/terms/",
       "contact": {
         "name": "DevRonins Team"

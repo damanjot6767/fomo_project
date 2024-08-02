@@ -22,10 +22,14 @@ app.use(cookieParser());
 app.use(compression());
 app.use(logger('dev'));
 
+//--------------allRoutes
+import { allRouters } from "./routes";
+
+app.use(allRouters)
 
 //----------------Kafka connnect
-import { connectKafka } from "./kafka/kafka";
-connectKafka()
+// import { connectKafka } from "./kafka/kafka";
+// connectKafka()
 
 //------------------Swagger setup
 import swaggerUi from 'swagger-ui-express';
