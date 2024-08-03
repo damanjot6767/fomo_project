@@ -4,9 +4,10 @@ import { CoinResponseDto } from "../../controllers/coin/dto";
 import { getCoinsFromLiveCoinApi } from "../../external-services/live-coin-watch-service";
 
 let intervalId: NodeJS.Timeout;
+let intervalTime: number = process.env.LIVE_COIN_API_CALL_INTERVAL_TIME?+process.env.LIVE_COIN_API_CALL_INTERVAL_TIME :60000;
 
 export const liveCoinWatchIntervals= async() => {
-    // setInterval(async () => {
+    setInterval(async () => {
         try {
             const coins: CoinResponseDto[] = await getCoinsFromLiveCoinApi();
             
@@ -22,7 +23,7 @@ export const liveCoinWatchIntervals= async() => {
         } catch (error) {
             console.error("Error in liveCoinWatchIntervals:", error);
         }
-    // }, 2000); // every two seconds we call these APIs
+    }, intervalTime); 
 }
 
 export const stopLiveCoinWatchIntervals = () => {
