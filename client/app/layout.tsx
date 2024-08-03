@@ -12,8 +12,8 @@ const inter = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: 'YOLO Backpackers » Sociable And Unique Stays in Himachal',
-  description: 'YOLO Backpackers Home page',
+  title: 'CryptoFetch:',
+  description: 'Coin Data and Market Analysis',
 }
 
 export default async function RootLayout({

@@ -13,10 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const constants_1 = require("../constants");
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const connectionInstance = yield mongoose_1.default.connect(`${process.env.MONGODB_URL}/${constants_1.DB_NAME}`);
+        const connectionInstance = yield mongoose_1.default.connect(`${process.env.MONGODB_URL}`);
         console.log(`\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
     }
     catch (error) {
