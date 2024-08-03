@@ -18,11 +18,35 @@ export const coinEntriesSchema = new Schema(
             type: Number,
             required: true
         },
+        percentageChangeInPrice: {
+            hour: {
+                type: Number,
+                required: true
+            },
+            day: {
+                type: Number,
+                required: true
+            },
+            week: {
+                type: Number,
+                required: true
+            },
+        }
     },
     {
         timestamps: true
     }
 )
+
+coinEntriesSchema.virtual('coin', {
+    ref: 'Coins',
+    localField: 'coinId',
+    foreignField: 'code',
+    justOne: true
+  });
+  
+coinEntriesSchema.set('toJSON', { virtuals: true });
+coinEntriesSchema.set('toObject', { virtuals: true });
 
 export const CoinEntriesModel = mongoose.model('CoinEntries', coinEntriesSchema);
 
@@ -31,8 +55,8 @@ export const CoinEntriesModel = mongoose.model('CoinEntries', coinEntriesSchema)
 
 export const getLatestCoinEntryByCoinId = async ( coinId: string): Promise<CoinEntryResponseDto> => {
     try {
-        const res: any = await CoinEntriesModel.findOne({ coinId }, { sort: { createdAt: -1 } });
-        return res
+        const res = await CoinEntriesModel.findOne({ coinId }).sort({ createdAt: -1 });
+        return res as CoinEntryResponseDto;
     } catch (error) {
         throw new ApiError(500, "Something went wrong while finding latest coi entry by coin id")
     }
@@ -49,7 +73,7 @@ export const getCoinEntriesByCoinIdwithCoinData = async (coinId: string, page: n
             {
                 $lookup: {
                     from: 'coins',
-                    foreignField: "_id",
+                    foreignField: "code",
                     localField: "coinId",
                     as: "coin"
                 }

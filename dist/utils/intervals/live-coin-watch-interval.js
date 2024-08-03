@@ -12,17 +12,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.stopLiveCoinWatchIntervals = exports.liveCoinWatchIntervals = void 0;
 const coin_entry_service_1 = require("../../controllers/coin-entry/coin-entry-service");
 const coin_service_1 = require("../../controllers/coin/coin-service");
+const live_coin_watch_service_1 = require("../../external-services/live-coin-watch-service");
 let intervalId;
-const liveCoinWatchIntervals = () => {
-    setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            yield Promise.all([(0, coin_service_1.createMultipleCoinsService)(), (0, coin_entry_service_1.createMultipleCoinEntriesService)()]);
-        }
-        catch (error) {
-            console.error("Error in liveCoinWatchIntervals:", error);
-        }
-    }), 2000); // every two seconds we call these APIs
-};
+const liveCoinWatchIntervals = () => __awaiter(void 0, void 0, void 0, function* () {
+    // setInterval(async () => {
+    try {
+        const coins = yield (0, live_coin_watch_service_1.getCoinsFromLiveCoinApi)();
+        yield (0, coin_service_1.createMultipleCoinsService)(coins);
+        const coinEntries = yield coins.map((coin) => ({
+            coinId: coin.symbol,
+            rate: coin.volume,
+            volume: coin.volume,
+            percentageChangeInPrice: coin.percentageChangeInPrice
+        }));
+        yield (0, coin_entry_service_1.createMultipleCoinEntriesService)(coinEntries);
+    }
+    catch (error) {
+        console.error("Error in liveCoinWatchIntervals:", error);
+    }
+    // }, 2000); // every two seconds we call these APIs
+});
 exports.liveCoinWatchIntervals = liveCoinWatchIntervals;
 const stopLiveCoinWatchIntervals = () => {
     if (intervalId) {

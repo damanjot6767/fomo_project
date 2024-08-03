@@ -21,7 +21,7 @@ const routes = [
         path: '/v1/coin/:symbol',
         joiSchemaForSwagger: {
             group: 'Coin',
-            description: `Route get coin by id.`,
+            description: `Route get coin by symbol.`,
             params: validation_1.getCoinByIdParamJoiValidationObject,
         },
         middlewares: [],

@@ -3,7 +3,7 @@ import { asyncHandler } from "../../../utils/async-handler";
 import { ApiError } from "../../../utils/api-error";
 
 export const getCoinByIdParamJoiValidationObject = Joi.object({
-    symbol: Joi.string().required()
+    code: Joi.string().required()
 })
 
 export const GetCoinByIdParamJoiValidation = asyncHandler(async (req, res, next) => {

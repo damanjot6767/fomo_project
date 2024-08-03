@@ -1,4 +1,4 @@
-import { getCoinBySymbol, getCoins } from "../controllers/coin/coin-controller";
+import { getCoinByCode, getCoins } from "../controllers/coin/coin-controller";
 import { getCoinByIdParamJoiValidationObject } from "../controllers/coin/validation";
 
 //for now all apis publically open
@@ -17,15 +17,15 @@ const routes = [
 	},
     {
 		method: 'get',
-		path: '/v1/coin/:symbol',
+		path: '/v1/coin/:code',
 		joiSchemaForSwagger: {
 			group: 'Coin',
-			description: `Route get coin by id.`,
+			description: `Route get coin by code.`,
 			params: getCoinByIdParamJoiValidationObject,
 		},
 		middlewares: [],
 		auth: false,
-		handler: getCoinBySymbol
+		handler: getCoinByCode
 	}
 ]
 

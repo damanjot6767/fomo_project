@@ -13,7 +13,7 @@ const live_coin_watch_interval_1 = require("./utils/intervals/live-coin-watch-in
         console.log(`Server is runing at port ${process.env.PORT}`);
     });
     // liveCoinWatchIntervals
-    // liveCoinWatchIntervals()
+    (0, live_coin_watch_interval_1.liveCoinWatchIntervals)();
 })
     .catch((err) => {
     console.log("MONGODB connection error", err);

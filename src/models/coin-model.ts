@@ -13,12 +13,6 @@ export const coinSchema = new Schema(
             unique: true,
             index: true
         },
-        symbol: {
-            type: String,
-            required: true,
-            unique: true,
-            index: true
-        },
         code: {
             type: String,
             required: true,
@@ -76,14 +70,14 @@ export const CoinModel = mongoose.model('Coin', coinSchema);
 
 // User Services
 export const getCoins = (): Promise<CoinResponseDto[]> => CoinModel.find();
-export const getCoinBySymbol = (symbol: string): Promise<CoinResponseDto> => CoinModel.findOne({ symbol });
-export const deleteCoinBySymbol = (symbol: string): any => CoinModel.findOneAndDelete({ symbol });
+export const getCoinByCode = (code: string): Promise<CoinResponseDto | any> => CoinModel.findOne({ code });
+export const deleteCoinByCode = (code: string): any => CoinModel.findOneAndDelete({ code });
 
 export const createMultipleCoins = async (values: CreateCoinDto[]): Promise<any> => {
     try {
         const bulkOps = values.map((coin) => ({
             updateOne: {
-                filter: { _id: coin._id },
+                filter: { code: coin.code },
                 update: { $set: coin },
                 upsert: true
             }
@@ -100,7 +94,7 @@ export const updateMultipleCoins = async (values: CreateCoinDto[]): Promise<any>
     try {
         const bulkOps = values.map((coin) => ({
             updateOne: {
-                filter: { _id: coin._id },
+                filter: { code: coin.code },
                 update: { $set: coin },
                 upsert: true
             }

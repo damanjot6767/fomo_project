@@ -11,7 +11,7 @@ connectDB()
     });
 
     // liveCoinWatchIntervals
-    // liveCoinWatchIntervals()
+    liveCoinWatchIntervals()
   })
   .catch((err) => {
     console.log("MONGODB connection error", err);

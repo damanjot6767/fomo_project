@@ -2,10 +2,10 @@ import { Response, NextFunction, RequestHandler } from 'express';
 
 
 const asyncHandler = (requestHandler: RequestHandler) => {
-  return async (req, res: Response, next: NextFunction) => {
+  return async (req: any, res: Response, next: NextFunction) => {
     try {
       await Promise.resolve(requestHandler(req, res, next));
-    } catch (err) {
+    } catch (err: any) {
       res.status(err?.statusCode || 400).json({
         statusCode: err?.statusCode || 400,
         data: null,

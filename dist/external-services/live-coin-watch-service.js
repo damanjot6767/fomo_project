@@ -18,9 +18,18 @@ const liveCoinApiConfig = {
 };
 const getCoinsFromLiveCoinApi = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const res = yield (0, axios_api_call_1.AxiosApiCall)(axios_api_call_1.AxiosApiMethodEnum.GET, `${liveCoinApiConfig.baseUrl}/coinlist`, {}, {});
+        const res = yield (0, axios_api_call_1.AxiosApiCall)(axios_api_call_1.AxiosApiMethodEnum.POST, `${liveCoinApiConfig.baseUrl}/coins/list`, {
+            headers: { "X-Api-Key": liveCoinApiConfig.apiKey }
+        }, {
+            "currency": "USD",
+            "sort": "rank",
+            "order": "ascending",
+            "offset": 0,
+            "limit": 10,
+            "meta": true
+        } // default body parameters
+        );
         const newData = res.map((coin) => ({
-            _id: coin.code,
             name: coin.name,
             symbol: coin.symbol,
             code: coin.code,

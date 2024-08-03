@@ -10,14 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCoinBySymbolService = exports.getCoinsService = exports.updateMultipleCoinsService = exports.createMultipleCoinsService = void 0;
-const live_coin_watch_service_1 = require("../../external-services/live-coin-watch-service");
 const coin_model_1 = require("../../models/coin-model");
 const api_error_1 = require("../../utils/api-error");
 //this service internally call by our setInternal function server side
-const createMultipleCoinsService = () => __awaiter(void 0, void 0, void 0, function* () {
+const createMultipleCoinsService = (values) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const coins = yield (0, live_coin_watch_service_1.getCoinsFromLiveCoinApi)();
-        const res = yield (0, coin_model_1.createMultipleCoins)(coins);
+        const res = yield (0, coin_model_1.createMultipleCoins)(values);
         return res;
     }
     catch (error) {

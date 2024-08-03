@@ -27,9 +27,6 @@ import { allRouters } from "./routes";
 
 app.use(allRouters)
 
-//----------------Kafka connnect
-// import { connectKafka } from "./kafka/kafka";
-// connectKafka()
 
 //------------------Swagger setup
 import swaggerUi from 'swagger-ui-express';

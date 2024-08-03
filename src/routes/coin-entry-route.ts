@@ -10,7 +10,7 @@ const routes = [
 		joiSchemaForSwagger: {
 			params: getCoinEntryByIdParamJoiValidationObject,
 			group: 'Coin Entries',
-			description: `Route to login a user of any role.`,
+			description: `Route to coin entries by coinId of any role.`,
 			model: 'CoinEntries',
 		},
 		middlewares: [],

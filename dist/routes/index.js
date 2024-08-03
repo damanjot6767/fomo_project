@@ -23,9 +23,11 @@ const allRouters = (0, express_1.Router)();
 exports.allRouters = allRouters;
 routes.forEach(route => {
     if (route.middlewares.length > 0) {
+        //@ts-ignore
         allRouters[route.method](route.path, ...route.middlewares, route.handler);
     }
     else {
+        //@ts-ignore
         allRouters[route.method](route.path, route.handler);
     }
 });

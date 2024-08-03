@@ -5,7 +5,6 @@ import { ApiError } from '../../../utils/api-error';
 const createCoinJoiValidationObject = Joi.object({
     _id: Joi.string().required(),
     name: Joi.string().required(),
-    symbol: Joi.string().required(),
     code: Joi.string().required(),
     rank: Joi.number().required(),
     image: Joi.object({

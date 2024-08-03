@@ -48,6 +48,20 @@ exports.coinEntriesSchema = new mongoose_1.Schema({
         type: Number,
         required: true
     },
+    percentageChangeInPrice: {
+        hour: {
+            type: Number,
+            required: true
+        },
+        day: {
+            type: Number,
+            required: true
+        },
+        week: {
+            type: Number,
+            required: true
+        },
+    }
 }, {
     timestamps: true
 });

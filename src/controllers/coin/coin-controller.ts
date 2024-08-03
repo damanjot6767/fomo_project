@@ -1,6 +1,6 @@
 import { ApiResponse } from "../../utils/api-response";
 import { asyncHandler } from "../../utils/async-handler";
-import { getCoinBySymbolService, getCoinsService } from "./coin-service";
+import { getCoinByCodeService, getCoinsService } from "./coin-service";
 
 export const getCoins = asyncHandler(async (req, res) => {
 
@@ -15,9 +15,9 @@ export const getCoins = asyncHandler(async (req, res) => {
         )
 })
 
-export const getCoinBySymbol = asyncHandler(async (req, res) => {
+export const getCoinByCode = asyncHandler(async (req, res) => {
 
-    const response = await getCoinBySymbolService(req.params.symbol)
+    const response = await getCoinByCodeService(req.params.code)
 
     return res.
         status(200).

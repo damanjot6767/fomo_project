@@ -1,13 +1,11 @@
-import { getCoinsFromLiveCoinApi } from "../../external-services/live-coin-watch-service";
-import { createMultipleCoins, getCoinBySymbol, getCoins, updateMultipleCoins } from "../../models/coin-model";
+import { createMultipleCoins, getCoinByCode, getCoins, updateMultipleCoins } from "../../models/coin-model";
 import { ApiError } from "../../utils/api-error";
 import { CoinResponseDto, CreateCoinDto, UpdateCoinDto } from "./dto";
 
 //this service internally call by our setInternal function server side
-export const createMultipleCoinsService = async (): Promise<any> => {
+export const createMultipleCoinsService = async (values: CoinResponseDto[]): Promise<any> => {
     try {
-        const coins: CreateCoinDto[] = await getCoinsFromLiveCoinApi()
-        const res = await createMultipleCoins(coins);
+        const res = await createMultipleCoins(values);
         return res
     } catch (error) {
         throw error;
@@ -31,9 +29,9 @@ export const getCoinsService = async (): Promise<CoinResponseDto[]> => {
     return res
 }
 
-export const getCoinBySymbolService = async (symbol): Promise<CoinResponseDto> => {
+export const getCoinByCodeService = async (code: string): Promise<CoinResponseDto> => {
 
-    const res = await getCoinBySymbol(symbol)
+    const res = await getCoinByCode(code)
     if(!res) throw new ApiError(400, "not found")
     return res
 }

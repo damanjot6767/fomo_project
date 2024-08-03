@@ -1,5 +1,6 @@
 //this service internally call by our setInternal function server side
 
+import { Schema } from "mongoose";
 import { AxiosApiCall, AxiosApiMethodEnum } from "../utils/axios-api-call";
 
 const liveCoinApiConfig = {
@@ -10,11 +11,22 @@ const liveCoinApiConfig = {
 export const getCoinsFromLiveCoinApi = async (): Promise<any> => {
     try {
 
-        const res: any = await AxiosApiCall(AxiosApiMethodEnum.GET,`${liveCoinApiConfig.baseUrl}/coinlist`,{},{})
+        const res: any = await AxiosApiCall(
+            AxiosApiMethodEnum.POST,`${liveCoinApiConfig.baseUrl}/coins/list`,
+            {
+                headers: { "X-Api-Key": liveCoinApiConfig.apiKey }
+            },
+            {
+                "currency": "USD",
+                "sort": "rank",
+                "order": "ascending",
+                "offset": 0,
+                "limit": 10,
+                "meta": true
+            } // default body parameters
+        )
         const newData = res.map((coin:any)=>({
-            _id: coin.code,
             name: coin.name,
-            symbol: coin.symbol,
             code: coin.code,
             rank: coin.rank,
             image: coin.image,
@@ -34,10 +46,10 @@ export const getCoinsFromLiveCoinApi = async (): Promise<any> => {
 }
 
 
-export const getCoinDetailFromLiveCoinApi= async (symbol): Promise<any> => {
+export const getCoinDetailFromLiveCoinApi= async (code: string): Promise<any> => {
     try {
 
-        const res: any = await AxiosApiCall(AxiosApiMethodEnum.GET,`${liveCoinApiConfig.baseUrl}/coin/${symbol}`,{},{})
+        const res: any = await AxiosApiCall(AxiosApiMethodEnum.GET,`${liveCoinApiConfig.baseUrl}/coin/${code}`,{},{})
         return res
     } catch (error) {
         throw error;

@@ -26,9 +26,6 @@ app.use((0, morgan_1.default)('dev'));
 //--------------allRoutes
 const routes_1 = require("./routes");
 app.use(routes_1.allRouters);
-//----------------Kafka connnect
-// import { connectKafka } from "./kafka/kafka";
-// connectKafka()
 //------------------Swagger setup
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_json_1 = __importDefault(require("../swagger.json"));

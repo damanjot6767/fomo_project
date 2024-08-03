@@ -19,13 +19,15 @@ function AxiosApiCall(method, url, config, body) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const headers = {
-                Authorization: `Bearer `, // Add the token here if necessary
-                'Content-Type': 'application/json',
-            };
-            const res = yield axios_1.default.request(Object.assign(Object.assign({}, config), { headers,
+            const headers = config.headers ? Object.assign({}, config.headers) : undefined;
+            const params = config.params ? Object.assign({}, config.params) : undefined;
+            const res = yield axios_1.default.request({
+                headers,
                 url,
-                method, data: body ? body : undefined, params: config.params ? config.params : undefined }));
+                method,
+                data: body ? body : undefined,
+                params
+            });
             return res.data;
         }
         catch (e) {

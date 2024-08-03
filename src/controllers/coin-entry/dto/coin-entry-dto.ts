@@ -5,6 +5,11 @@ interface CoinEntry {
     rate: number;
     volume: number;
     coinId: number;
+    percentageChangeInPrice: {
+        hour: number;
+        day: number;
+        week: number;
+    };
     coin : Coin
     createdAt?: Date;
     updatedAt?: Date;

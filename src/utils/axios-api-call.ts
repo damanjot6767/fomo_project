@@ -8,17 +8,15 @@ async function AxiosApiCall<T>(
     body?: any,
 ): Promise<T> {
     try {
-        const headers = {
-            Authorization: `Bearer `, // Add the token here if necessary
-            'Content-Type': 'application/json',
-        };
+        const headers = config.headers?{...config.headers}:undefined;
+        const params = config.params?{...config.params}:undefined;
+
         const res = await axios.request({
-            ...config,
             headers,
             url,
             method,
             data: body ? body : undefined,
-            params: config.params ? config.params : undefined,
+            params
         });
         return res.data;
     } catch (e: any) {
