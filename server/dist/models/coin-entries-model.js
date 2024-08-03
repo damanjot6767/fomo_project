@@ -65,11 +65,19 @@ exports.coinEntriesSchema = new mongoose_1.Schema({
 }, {
     timestamps: true
 });
+exports.coinEntriesSchema.virtual('coin', {
+    ref: 'Coins',
+    localField: 'coinId',
+    foreignField: 'code',
+    justOne: true
+});
+exports.coinEntriesSchema.set('toJSON', { virtuals: true });
+exports.coinEntriesSchema.set('toObject', { virtuals: true });
 exports.CoinEntriesModel = mongoose_1.default.model('CoinEntries', exports.coinEntriesSchema);
 // coinEntries Services
 const getLatestCoinEntryByCoinId = (coinId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const res = yield exports.CoinEntriesModel.findOne({ coinId }, { sort: { createdAt: -1 } });
+        const res = yield exports.CoinEntriesModel.findOne({ coinId }).sort({ createdAt: -1 });
         return res;
     }
     catch (error) {
@@ -88,16 +96,27 @@ const getCoinEntriesByCoinIdwithCoinData = (coinId, page = 1, limit = 10) => __a
             {
                 $lookup: {
                     from: 'coins',
-                    foreignField: "_id",
+                    foreignField: "code",
                     localField: "coinId",
                     as: "coin"
                 }
             },
             {
-                $skip: (page - 1) * limit // Skip documents based on the current page
+                $unwind: {
+                    path: "$coin",
+                    preserveNullAndEmptyArrays: true
+                }
             },
             {
-                $limit: limit // Limit the number of documents per page
+                $sort: {
+                    createdAt: -1
+                }
+            },
+            {
+                $skip: (page - 1) * limit
+            },
+            {
+                $limit: limit
             }
         ]);
         return coinEntries;

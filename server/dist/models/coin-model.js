@@ -32,17 +32,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateMultipleCoins = exports.createMultipleCoins = exports.deleteCoinBySymbol = exports.getCoinBySymbol = exports.getCoins = exports.CoinModel = exports.coinSchema = void 0;
+exports.updateMultipleCoins = exports.createMultipleCoins = exports.deleteCoinByCode = exports.getCoinByCode = exports.getCoins = exports.CoinModel = exports.coinSchema = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const api_error_1 = require("../utils/api-error");
 exports.coinSchema = new mongoose_1.Schema({
     name: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true
-    },
-    symbol: {
         type: String,
         required: true,
         unique: true,
@@ -101,15 +95,15 @@ exports.CoinModel = mongoose_1.default.model('Coin', exports.coinSchema);
 // User Services
 const getCoins = () => exports.CoinModel.find();
 exports.getCoins = getCoins;
-const getCoinBySymbol = (symbol) => exports.CoinModel.findOne({ symbol });
-exports.getCoinBySymbol = getCoinBySymbol;
-const deleteCoinBySymbol = (symbol) => exports.CoinModel.findOneAndDelete({ symbol });
-exports.deleteCoinBySymbol = deleteCoinBySymbol;
+const getCoinByCode = (code) => exports.CoinModel.findOne({ code });
+exports.getCoinByCode = getCoinByCode;
+const deleteCoinByCode = (code) => exports.CoinModel.findOneAndDelete({ code });
+exports.deleteCoinByCode = deleteCoinByCode;
 const createMultipleCoins = (values) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const bulkOps = values.map((coin) => ({
             updateOne: {
-                filter: { _id: coin._id },
+                filter: { code: coin.code },
                 update: { $set: coin },
                 upsert: true
             }
@@ -126,7 +120,7 @@ const updateMultipleCoins = (values) => __awaiter(void 0, void 0, void 0, functi
     try {
         const bulkOps = values.map((coin) => ({
             updateOne: {
-                filter: { _id: coin._id },
+                filter: { code: coin.code },
                 update: { $set: coin },
                 upsert: true
             }

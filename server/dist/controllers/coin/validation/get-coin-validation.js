@@ -17,7 +17,7 @@ const joi_1 = __importDefault(require("joi"));
 const async_handler_1 = require("../../../utils/async-handler");
 const api_error_1 = require("../../../utils/api-error");
 exports.getCoinByIdParamJoiValidationObject = joi_1.default.object({
-    symbol: joi_1.default.string().required()
+    code: joi_1.default.string().required()
 });
 exports.GetCoinByIdParamJoiValidation = (0, async_handler_1.asyncHandler)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { error, value } = exports.getCoinByIdParamJoiValidationObject.validate(req.params);

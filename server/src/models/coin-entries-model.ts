@@ -79,10 +79,21 @@ export const getCoinEntriesByCoinIdwithCoinData = async (coinId: string, page: n
                 }
             },
             {
-                $skip: (page - 1) * limit // Skip documents based on the current page
+                $unwind: {
+                    path: "$coin",
+                    preserveNullAndEmptyArrays: true
+                }
             },
             {
-                $limit: limit // Limit the number of documents per page
+                $sort: {
+                    createdAt: -1 
+                }
+            },
+            {
+                $skip: (page - 1) * limit 
+            },
+            {
+                $limit: limit 
             }
         ]);
 

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCoinBySymbol = exports.getCoins = void 0;
+exports.getCoinByCode = exports.getCoins = void 0;
 const api_response_1 = require("../../utils/api-response");
 const async_handler_1 = require("../../utils/async-handler");
 const coin_service_1 = require("./coin-service");
@@ -19,8 +19,8 @@ exports.getCoins = (0, async_handler_1.asyncHandler)((req, res) => __awaiter(voi
         status(200).
         json(new api_response_1.ApiResponse(201, response, 'coins get successfully'));
 }));
-exports.getCoinBySymbol = (0, async_handler_1.asyncHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const response = yield (0, coin_service_1.getCoinBySymbolService)(req.params.symbol);
+exports.getCoinByCode = (0, async_handler_1.asyncHandler)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield (0, coin_service_1.getCoinByCodeService)(req.params.code);
     return res.
         status(200).
         json(new api_response_1.ApiResponse(201, response, 'Coin get successfully'));

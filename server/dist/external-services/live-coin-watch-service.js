@@ -31,7 +31,6 @@ const getCoinsFromLiveCoinApi = () => __awaiter(void 0, void 0, void 0, function
         );
         const newData = res.map((coin) => ({
             name: coin.name,
-            symbol: coin.symbol,
             code: coin.code,
             rank: coin.rank,
             image: coin.image,
@@ -51,9 +50,9 @@ const getCoinsFromLiveCoinApi = () => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.getCoinsFromLiveCoinApi = getCoinsFromLiveCoinApi;
-const getCoinDetailFromLiveCoinApi = (symbol) => __awaiter(void 0, void 0, void 0, function* () {
+const getCoinDetailFromLiveCoinApi = (code) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const res = yield (0, axios_api_call_1.AxiosApiCall)(axios_api_call_1.AxiosApiMethodEnum.GET, `${liveCoinApiConfig.baseUrl}/coin/${symbol}`, {}, {});
+        const res = yield (0, axios_api_call_1.AxiosApiCall)(axios_api_call_1.AxiosApiMethodEnum.GET, `${liveCoinApiConfig.baseUrl}/coin/${code}`, {}, {});
         return res;
     }
     catch (error) {

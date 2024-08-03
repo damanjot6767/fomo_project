@@ -18,15 +18,15 @@ const routes = [
     },
     {
         method: 'get',
-        path: '/v1/coin/:symbol',
+        path: '/v1/coin/:code',
         joiSchemaForSwagger: {
             group: 'Coin',
-            description: `Route get coin by symbol.`,
+            description: `Route get coin by code.`,
             params: validation_1.getCoinByIdParamJoiValidationObject,
         },
         middlewares: [],
         auth: false,
-        handler: coin_controller_1.getCoinBySymbol
+        handler: coin_controller_1.getCoinByCode
     }
 ];
 exports.default = routes;
