@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+@layer base {
+:root {
+  --background: 0 0% 100%;
+  --foreground: 24 6% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 24 6% 15%;
+  --primary: 203 61% 63%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 0 0% 13%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 36 20% 95%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 197 10% 87%;
+  --destructive-foreground: 197 10% 87%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 203 61% 63%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+}
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+}
+
+.gradient1 {
+  @apply bg-gradient-to-r from-[#536aea] via-[#F5F8FF] to-[#536aea]
+}
+
+.gradient2 {
+  @apply bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% 
+}
+
+.gradient3 {
+  @apply bg-gradient-to-r from-cyan-500 to-blue-500
+}
+
+.gradient4 {
+  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+}
+
+.gradient5 {
+  @apply bg-gradient-to-r from-amber-500 to-pink-500
+}
+
+.gradient6 {
+  @apply bg-gradient-to-r from-amber-500 to-pink-500
+}
+
+.gradient7 {
+  @apply bg-gradient-to-r from-emerald-400 to-cyan-400
+}
+
+.shadow1 {
+  @apply shadow-[0px_0px_30px_20px_#cbd5e0]
+}
+
+
+
+/* 203,61%,63% */
