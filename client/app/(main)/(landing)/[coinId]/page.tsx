@@ -1,32 +1,24 @@
-
-import { getExperienceWithServer } from "@/app/services";
-import ErrorPage from "@/components/common/error";
-import { ExperienceDeatils } from "@/components/experiences/experience";
+import dynamic from "next/dynamic";
+const CoinEntry = dynamic(() => import('@/components/coinEntry/coin-entry'), {ssr: false});
 
 interface IParams {
-  experienceId: string;
+  coinId: string;
 }
 
-async function Page({ params }: { params: IParams }) {
-  try {
-    const experienceDetails = await getExperienceWithServer(+params.experienceId)
+function Page({ params }: { params: IParams }) {
 
     return (
       <div
-        className="
+      className="
       w-full
       h-auto
       flex
       flex-col
       text-[70px]"
-      >
-        <ExperienceDeatils experienceDetails={experienceDetails} />
-      </div>
+    >
+      <CoinEntry params={params}/>
+    </div>
     );
-  } catch (error: any) {
-    let err:string = error;
-    return (<ErrorPage error={err}/>)
-  }
 }
 
 export default Page;

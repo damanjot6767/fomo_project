@@ -4,6 +4,7 @@ import './globals.css'
 import StoreProviders from './store/storeProvider'
 import { ScrollToTop } from '@/components/scrollToTop/scrollToTop';
 import { Toaster } from '@/components/ui/toaster';
+import { Navbar } from '@/components/navbar/navbar';
 
 const inter = Oswald({
   subsets: ['latin'],
@@ -23,9 +24,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} p-0 m-0`}>
+      <body className={`${inter.className} p-0 m-0 bg-background`}>
         <StoreProviders>
           <ScrollToTop />
+          <Navbar/>
           {children}
           <Toaster />
         </StoreProviders>

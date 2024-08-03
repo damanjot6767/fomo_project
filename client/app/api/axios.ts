@@ -10,7 +10,7 @@ interface ApiConfig {
 
 
 const apiConfig: ApiConfig = {
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || `http://localhost:3000`,
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || `http://localhost:8000`,
   timeout: Number(process.env.NEXT_PUBLIC_API_TIMEOUT) || 10000
 };
 
@@ -74,5 +74,5 @@ export default api;
 
 //----------------------------------------------------------------------coin
 export const fetchCoins = () => axiosInstance.get('/v1/coin/get-all-coins');
-export const fetchCoinEntriesByCode = (code: string) => axiosInstance.get(`/v1/coin-entries/:${code}`)
+export const fetchCoinEntriesByCode = (code: string) => axiosInstance.get(`/v1/coin-entries/${code}`)
 

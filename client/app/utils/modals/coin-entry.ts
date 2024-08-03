@@ -11,7 +11,7 @@ export interface CoinEntryModal {
         week: number;
     };
     coin : CoinModal
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }
 

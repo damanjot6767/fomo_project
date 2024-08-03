@@ -1,5 +1,6 @@
-import { Home } from "@/components/home/home";
 
+import dynamic from "next/dynamic";
+const Coin = dynamic(() => import('@/components/coin/coin'), {ssr: false});
 
 function Page() {
 
@@ -12,7 +13,7 @@ function Page() {
       flex-col
       text-[70px]"
     >
-      <Home/>
+      <Coin/>
     </div>
   );
 }
