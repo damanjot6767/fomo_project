@@ -1,6 +1,6 @@
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef, Row } from "@tanstack/react-table"
 
 // import { priorities, statuses } from "./data"
 import { DataTableColumnHeader } from "@/components/tabel/data-table-column-header"
@@ -40,6 +40,27 @@ const formatNumberToUSD = (num: number)=> {
 const calculateVolumeInUSD = (volume: number, price: number) => {
   const volumeInUSD = volume * price;
   return formatNumberToUSD(volumeInUSD);
+}
+
+const CoinEntryCell = ({row}:{row: Row<CoinModal>})=>{
+
+  const navigate = useRouter();
+      const dispatch = useAppDispatch();
+
+      const handleCoinEntry = () => {
+        dispatch(CoinActions.setCoinDetails(row?.original))
+        navigate.push(RoutesName.Coin+row.original.code)
+      }
+
+      return(
+        <div className="flex ml-2" onClick={handleCoinEntry}>
+          <div 
+           className={cn("max-w-[150px] max-h-[30px] truncate text-xs font-[100] text-muted-foreground hover:text-primary underline")} >
+            {`Check Entries`}
+          </div>
+        </div>
+      )
+
 }
 
 export const columns: ColumnDef<CoinModal>[] = [
@@ -153,21 +174,11 @@ export const columns: ColumnDef<CoinModal>[] = [
       <DataTableColumnHeader column={column} title="Coin Entries" />
     ),
     cell: ({ row }) => {
-      const navigate = useRouter();
-      const dispatch = useAppDispatch();
-
-      const handleCoinEntry = () => {
-        dispatch(CoinActions.setCoinDetails(row?.original))
-        navigate.push(RoutesName.Coin+row.original.code)
-      }
-
+      
       return (
-        <div className="flex ml-2" onClick={handleCoinEntry}>
-          <div 
-           className={cn("max-w-[150px] max-h-[30px] truncate text-xs font-[100] text-muted-foreground hover:text-primary underline")} >
-            {`Check Entries`}
-          </div>
-        </div>
+       <>
+        <CoinEntryCell row={row}/>
+        </>
       )
     },
     enableSorting: false,

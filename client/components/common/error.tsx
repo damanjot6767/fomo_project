@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 const ErrorPage = ({
     error
   }: {
-    error: string;
+    error: any;
   }) => {
     const router = useRouter()
     return (
@@ -77,7 +77,7 @@ const ErrorPage = ({
                     transition-all
                     duration-200
                     bg-primary"
-                        href={RoutesName.Home}>
+                        href={RoutesName.Coin}>
                         <TypographyH5 className="font-[600]" title="BACK TO HOME PAGE" />
                         <GoArrowRight
                         size={20}
